@@ -23,15 +23,27 @@ class Natural(int):
 
     def __floordiv__(self, __x):
         if type(__x) == int or type(__x) == Natural:
-            return Natural(super().__floordiv__(__x))
+            return Natural(int(self)//(__x))
         else:
-            return super().__floordiv__(__x)
+            return int(self).__floordiv__(__x)
 
     def __pow__(self, __x):
         if type(__x) == int or type(__x) == Natural:
             return Natural(super().__pow__(__x))
         else:
             return super().__pow__(__x)
+
+    #def __truediv__(self, __x):
+    #    if type(__x) == int or type(__x) == Natural:
+    #        return Natural(super().__truediv__(__x))
+    #    else:
+    #        return super().__truediv__(__x)
+
+    #def __mod__(self, __x):
+    #    if type(__x) == int or type(__x) == Natural:
+    #        return Natural(super().__mod__(__x))
+    #    else:
+    #        return super().__mod__(__x)
 
     def return_x(self):
         if self.x >= 0:
@@ -42,4 +54,4 @@ class Natural(int):
 x = Natural(10)
 y = Natural(3)
 
-print(type(x*y))
+print(type(x-y))
