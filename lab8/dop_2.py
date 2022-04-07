@@ -1,35 +1,9 @@
-def upper_case_all(f):
-    def wrapper(self):
-        s = f(self)
-        if type(s) == str or type(s) == text:
-            return s.upper()
-        if type(s) == list:
-            s1 = []
-            for i in s:
-                s1.append(i.upper())
-            return s1
-    return wrapper
-
-def devide_by_sentences(f):
-    def wrapper(self):
-        end_of_sentence = ['.', '!', '?']
-        str1 = f(self).strip()
-        arr = []
-        count = 0
-        for i in range(len(str1)):
-            if str1[i-1] in end_of_sentence and not str1[i] in end_of_sentence:
-                arr.append(str1[i-count:i])
-                count = 0
-            if i == len(str1)-1:
-                arr.append(str1[i-count:i+1])
-            count += 1
-        return arr
-    return wrapper
+from dop_module import upper_case_all, devide_by_sentences
 
 class text(str):
 
     #@upper_case_all
-    #@devide_by_sentences
+    @devide_by_sentences
     def upper_case(self):
         end_of_sentence = ['.', '!', '?']
         escape_characters = ['\n', '\r', '\t', '\b', '\f']
@@ -53,9 +27,9 @@ class text(str):
                     break
             arr2.append(''.join(list1))
                     
-        return text(''.join(arr2))
+        return ''.join(arr2)
     
-    #@upper_case_all
+    @upper_case_all
     #@devide_by_sentences
     def remove_characters(self):
         unwanted_characters = r'#$%&*+/<=>@[\]^_`{|}~' # сюда можно добавить символы, которые являются не допустимыми в тексте
@@ -64,8 +38,7 @@ class text(str):
         for i in str1:
             if i in list_of_uc:
                 str1 = str1.replace(i, '')
-        return text(str1)
+        return str1
 
-#print(text('вроде этот метод работает. \n даже с троеточием... не плохо ').upper_case())
-print(text('проценты - %, скобки - []. Что-то еще.').remove_characters())
-#print(text('почему бы и нет?!?... а почему да..а').upper_case())
+print(text('вроде этот метод работает. \n даже с троеточием... не плохо ').upper_case())
+#print(text('проценты - %, скобки - []. Что-то еще.').remove_characters())
